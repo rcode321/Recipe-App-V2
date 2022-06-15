@@ -1,5 +1,20 @@
 import * as React from "react";
-import { Images } from "../Recipes/RecipeItem.styles";
+import {
+	FONTSIZE,
+	SpecialAndIngredients,
+	IngredientsTitle,
+	RecipeDetailsText2,
+} from "./RecipeDetailsStyles";
+import {
+	WelcomeContainer,
+	WelcomeContent,
+	WelcomeImg,
+	WelcomeContentText,
+	WelcomeContentTitle,
+	WelcomeText,
+	Img,
+} from "./../Welcome/Welcome.styles";
+import Specials from "./../Specials/Specials";
 
 const RecipeDetails = ({
 	directions,
@@ -12,42 +27,49 @@ const RecipeDetails = ({
 	editDate,
 	postDate,
 	images,
+	text,
+	type,
+	code,
+	geo,
+	specialTitle,
 }) => {
 	return (
-		<div>
-			<div>
-				<div m={4}>
-					<h2 variant="h3"> {title}</h2>
-					<h2 variant="subtitle1"> {description}</h2>
-				</div>
-				<Images src={images} alt={title} />
+		<>
+			<WelcomeContainer>
+				<WelcomeContent>
+					<WelcomeImg>
+						<Img src={images} alt=" Delious Pizza" />
+					</WelcomeImg>
+					<WelcomeContentText>
+						<WelcomeContentTitle>{title}</WelcomeContentTitle>
+						<WelcomeText>{description}</WelcomeText>
+						<FONTSIZE>
+							{directions} <hr />
+							<RecipeDetailsText2>
+								{`Servings: ${servings} -`}
+								<RecipeDetailsText2>{`Cooktime: ${cookTime}-`} </RecipeDetailsText2>
+								<RecipeDetailsText2>{`Preptime: ${prepTime}`} </RecipeDetailsText2>
+							</RecipeDetailsText2>
+						</FONTSIZE>
+					</WelcomeContentText>
+				</WelcomeContent>
+			</WelcomeContainer>
 
-				<div>
-					<div>
-						<div> {cookTime}</div>
-					</div>
-
-					<div secondary={`${servings} persons`} />
-
-					<div>{prepTime}</div>
-
-					<div>{editDate}</div>
-					<div>{postDate}</div>
-				</div>
-			</div>
-			<h2 variant="h3" p={2}>
-				Directions
-			</h2>
-			<div p={2}>
-				<h2>{directions}</h2>
-			</div>
-			<h2 variant="h3" p={2}>
-				Ingredients
-			</h2>
-			<div p={1}>
-				<div>{ingredients}</div>
-			</div>
-		</div>
+			<IngredientsTitle>
+				<h1>Ingredients</h1>
+				<p>{description}</p>
+			</IngredientsTitle>
+			<SpecialAndIngredients>
+				<p>{ingredients} </p>
+				<Specials
+					type={type}
+					specialTitle={specialTitle}
+					text={text}
+					code={code}
+					geo={geo}
+				/>
+			</SpecialAndIngredients>
+		</>
 	);
 };
 

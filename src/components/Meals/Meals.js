@@ -17,7 +17,7 @@ import {
 } from "./Meals.styles";
 function Meals() {
 	return (
-		<div>
+		<div id="about">
 			<MealsContainer>
 				<MealsWrapper>
 					<MealsImage>

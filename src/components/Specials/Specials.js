@@ -1,29 +1,27 @@
-// import { Box } from "@mui/system";
+import { RecipeFeatureText } from "../Recipes/Recipes.styles";
+import { Button, SpecialStyled, TitleSpecial } from "./SpecialStyled";
 
-function Specials(props) {
-	const isHavePromo = props.code;
+function Specials({ code, geo, type, specialTitle, text }) {
+	const isHavePromo = code;
 
 	return (
-		<div>
-			<div>
-				{/* <Box className={classes.image}>
-					<img src={props.images.medium} alt={props.title} />
-				</Box> */}
-				<div>
-					<div variant="h4">{props.type}</div>
-					<div>{props.title}</div>
-					<div>{props.text}</div>
-					{isHavePromo ? `PROMO CODE ${props.code}` : ""}
-					<button
-						target="_blank"
-						href={`https://www.google.com/maps/search/${props.geo}`}
-						size="small"
-					>
-						Check Available Location
-					</button>
-				</div>
+		<SpecialStyled>
+			<TitleSpecial>Specials</TitleSpecial>
+			<RecipeFeatureText>{type}</RecipeFeatureText>
+			<RecipeFeatureText>{specialTitle}</RecipeFeatureText>
+			<RecipeFeatureText>{text}</RecipeFeatureText>
+			{isHavePromo ? `PROMO CODE ${code}` : ""}
+
+			<div style={{ marginTop: "20px" }}>
+				<Button
+					target="_blank"
+					href={`https://www.google.com/maps/search/${geo}`}
+					rel="noopener noreferrer"
+				>
+					Check Available Location
+				</Button>
 			</div>
-		</div>
+		</SpecialStyled>
 	);
 }
 

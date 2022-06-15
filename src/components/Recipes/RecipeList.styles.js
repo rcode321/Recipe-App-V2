@@ -373,4 +373,5 @@ export const Img = styled.img`
 
 export const Links = styled(Link)`
 	text-decoration: none;
+	color: black;
 `;

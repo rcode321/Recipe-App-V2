@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { IconContext } from "react-icons/";
 import { BiMenu, BiX } from "react-icons/bi";
 import { Button } from "../../Globalstyles";
+import { HashLink } from "react-router-hash-link";
+
+import FavoritesContext from "../../store/favoritesContext";
 import {
 	Nav,
 	NavbarContainer,
@@ -13,8 +16,13 @@ import {
 	MenuLink,
 	MenuItemBtn,
 	MenuLinkBtn,
+	Badge,
+	Hashlink,
+	Hashlink2,
 } from "./Navbar.styles";
 const Navbar = () => {
+	const favoritesCtx = useContext(FavoritesContext);
+
 	const [click, setClick] = useState(false);
 	const [button, setButton] = useState(true);
 	const handleClick = () => setClick(!click);
@@ -38,26 +46,34 @@ const Navbar = () => {
 			<IconContext.Provider value={{ color: "#fff" }}>
 				<Nav>
 					<NavbarContainer>
-						<NavLogo to="/">
-							<NavIcon />
-							Home Made
+						<NavLogo>
+							<Hashlink to="/#hero">
+								<NavIcon />
+								Recipe App
+							</Hashlink>
 						</NavLogo>
 						<MenuIcon onClick={handleClick}>{click ? <BiX /> : <BiMenu />}</MenuIcon>
 
 						<Menu onClick={handleClick} click={click}>
 							<MenuItem>
-								<MenuLink onClick={closeMenu} to="/">
+								<Hashlink2 onClick={closeMenu} to="/#hero">
 									Home
-								</MenuLink>
+								</Hashlink2>
 							</MenuItem>
 							<MenuItem>
-								<MenuLink onClick={closeMenu} to="/about">
+								<Hashlink2 onClick={closeMenu} to="/#about">
 									About
-								</MenuLink>
+								</Hashlink2>
 							</MenuItem>
 							<MenuItem>
-								<MenuLink onClick={closeMenu} to="/recipe">
+								<Hashlink2 onClick={closeMenu} to="/#recipe">
 									Recipes
+								</Hashlink2>
+							</MenuItem>
+							<MenuItem>
+								<MenuLink onClick={closeMenu} to="/favorites">
+									Favorites
+									<Badge>{favoritesCtx.totalFavorites}</Badge>
 								</MenuLink>
 							</MenuItem>
 							<MenuItemBtn>

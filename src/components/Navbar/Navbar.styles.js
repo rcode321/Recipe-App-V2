@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { BiRestaurant } from "react-icons/bi";
 import { Container } from "../../Globalstyles";
+import { HashLink } from "react-router-hash-link";
 
 export const Nav = styled.nav`
 	font-size: 18px;
@@ -9,8 +10,8 @@ export const Nav = styled.nav`
 	top: 0;
 	z-index: 999;
 	height: 80px;
-	background-color: rgba(0, 0, 0, 0.5);
-	/* box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5); */
+	background-color: rgba(0, 0, 0, 0.9);
+	box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
 	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
 	display: flex;
 	justify-content: center;
@@ -22,6 +23,12 @@ export const NavbarContainer = styled(Container)`
 	justify-content: space-between;
 	align-items: center;
 	height: 80px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.9);
+	max-width: unset;
+
 	${Container};
 `;
 
@@ -36,6 +43,47 @@ export const NavLogo = styled(Link)`
 	transition: all 0.5s ease;
 	&:hover {
 		transform: scale(1.08);
+	}
+`;
+
+export const Hashlink = styled(HashLink)`
+	color: #fff;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	font-size: 2.5rem;
+	font-weight: 800;
+	transition: all 0.5s ease;
+	&:hover {
+		transform: scale(1.08);
+	}
+`;
+
+export const Hashlink2 = styled(HashLink)`
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 2rem;
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 2rem;
+	height: 100%;
+	transition: all 0.2s ease;
+	&:hover {
+		color: #ffcb2b;
+		transform: traslateY(-3rem);
+	}
+	&:active {
+		transform: traslateY(3rem);
+		color: #e38b06;
+	}
+	@media only screen and (max-width: 1000px) {
+		display: block;
+		padding: 3rem;
+		text-align: center;
+		transition: all 0.2s ease;
 	}
 `;
 
@@ -136,4 +184,12 @@ export const MenuLinkBtn = styled(Link)`
 	width: 100%;
 	border: none;
 	outline: none;
+`;
+
+export const Badge = styled.a`
+	background-color: #cc2062;
+	color: rgb(250, 248, 248);
+	border-radius: 12px;
+	margin-left: 0.9rem;
+	padding: 1rem;
 `;

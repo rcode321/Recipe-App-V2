@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Specials from "../../components/Specials/Specials";
 import RecipeDetails from "../../components/RecipeDetails/RecipeDetails";
+import { RecipeStyles } from "./RecipeStyles";
 
 function Recipe(props) {
 	const { id } = useParams();
-	const [loadedMeetups, setLoadedMeetups] = useState({ recipe: [], special: [] });
+	const [loadRecipes, setRecipes] = useState({ recipe: [], special: [] });
 	const [specials, setSpecials] = useState(null);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			const fetchRecipes = await axios(`http://localhost:3001/recipes/${id}`);
 			const fetchSpecials = await axios(`http://localhost:3001/specials/`);
-			setLoadedMeetups({ recipe: fetchRecipes.data, special: fetchSpecials.data });
+			setRecipes({ recipe: fetchRecipes.data, special: fetchSpecials.data });
 
 			let hasSpecial = false;
 			fetchRecipes?.data?.ingredients.forEach((ingr) => {
@@ -32,73 +32,39 @@ function Recipe(props) {
 		fetchData();
 	}, [id]);
 
-	const direction = loadedMeetups?.recipe?.directions?.map((dir) => (
-		<h1 key={dir.instructions}>
-			<div>
-				<li>{dir.instructions}</li>
-			</div>
-		</h1>
+	const direction = loadRecipes?.recipe?.directions?.map((dir) => (
+		<p key={dir.instructions}>
+			<h2>{dir.instructions}</h2>
+		</p>
 	));
 
-	const style = {
-		width: "100%",
-		maxWidth: 360,
-		bgcolor: "background.paper",
-	};
-
-	const ingredient = loadedMeetups?.recipe?.ingredients?.map((keys) => (
-		// <ul>
-		// 	<Typography variant="subtitle1">
-		// 		<li>
-		// 			<ListItem>{keys.name}</ListItem>
-		// 		</li>
-		// 		<li>
-		// 			<ListItem>amount: {keys.amount}</ListItem>
-		// 		</li>
-		// 		<li>
-		// 			<ListItem>measurement:{keys.measurement}</ListItem>
-		// 		</li>
-		// 	</Typography>
-		// </ul>
-		<div sx={style} component="nav">
-			<div gutters>
-				<div primary={keys.name} secondary="name" />
-			</div>
-			<div gutters divider>
-				<div primary={keys.amount} secondary="amount" />
-			</div>
-			<div gutters>
-				<div primary={keys.measurement} secondary="measurement" />
-			</div>
-		</div>
+	const ingredient = loadRecipes?.recipe?.ingredients?.map((keys) => (
+		<RecipeStyles>
+			<p>{`Name : ${keys.name}`}</p>
+			<p>{`Amount : ${keys.amount}`}</p>
+			<p>{`Measurement : ${keys.measurement}`}</p>
+		</RecipeStyles>
 	));
 
 	return (
-		<div mt={2}>
-			<div>
-				<RecipeDetails
-					servings={loadedMeetups.recipe?.servings}
-					prepTime={loadedMeetups.recipe?.prepTime}
-					cookTime={loadedMeetups.recipe?.cookTime}
-					postDate={loadedMeetups.recipe?.postDate}
-					editDate={loadedMeetups.recipe?.editDate}
-					description={loadedMeetups.recipe.description}
-					images={loadedMeetups.recipe.images?.full}
-					title={loadedMeetups.recipe?.title}
-					directions={direction}
-					ingredients={ingredient}
-					geo={specials?.geo}
-				/>
-			</div>
-			<div>
-				<Specials
-					type={specials?.type}
-					title={specials?.title}
-					text={specials?.text}
-					code={specials?.code}
-					geo={specials?.geo}
-				/>
-			</div>
+		<div>
+			<RecipeDetails
+				servings={loadRecipes.recipe?.servings}
+				prepTime={loadRecipes.recipe?.prepTime}
+				cookTime={loadRecipes.recipe?.cookTime}
+				postDate={loadRecipes.recipe?.postDate}
+				editDate={loadRecipes.recipe?.editDate}
+				description={loadRecipes.recipe.description}
+				images={loadRecipes.recipe.images?.full}
+				title={loadRecipes.recipe?.title}
+				directions={direction}
+				ingredients={ingredient}
+				geo={specials?.geo}
+				text={specials?.text}
+				code={specials?.code}
+				type={specials?.type}
+				specialTitle={specials?.title}
+			/>
 		</div>
 	);
 }

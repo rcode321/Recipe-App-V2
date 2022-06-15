@@ -13,7 +13,7 @@ import {
 
 const Hero = () => {
 	return (
-		<div>
+		<div id="hero">
 			<HeroContainer>
 				<Navbar />
 				<HeroContent>

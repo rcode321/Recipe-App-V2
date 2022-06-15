@@ -74,7 +74,7 @@ function Footer() {
 					</FooterLinkContainer>
 					<FooterCopyRight to="https://github.com/muchirijane">
 						{" "}
-						&copy; Copyright 2020, Designed and coded with 💛 by Jane Tracy
+						&copy; Copyright 2020, Designed and coded with 😍 by Raf Mendoza
 					</FooterCopyRight>
 				</FooterContainer>
 			</FooterSection>
