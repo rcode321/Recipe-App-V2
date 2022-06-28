@@ -3,30 +3,30 @@ import { createContext, useState } from "react";
 const FavoritesContext = createContext({
 	favorites: [],
 	totalFavorites: 0,
-	addFavorite: (favoriteMeetup) => {},
-	removeFavorite: (meetupId) => {},
-	itemIsFavorite: (meetupId) => {},
+	addFavorite: () => {},
+	removeFavorite: () => {},
+	itemIsFavorite: () => {},
 });
 
 export const FavoritesContextProvider = (props) => {
 	const [userFavorites, setUserFavorites] = useState([]);
 
-	const addFavoriteHandler = (favoriteMeetup) => {
-		console.log(favoriteMeetup);
+	const addFavoriteHandler = (favoriteRecipe) => {
+		console.log(favoriteRecipe);
 		setUserFavorites((prevUserFavorites) => {
-			return prevUserFavorites.concat(favoriteMeetup);
+			return prevUserFavorites.concat(favoriteRecipe);
 		});
 	};
 
-	const removeFavoriteHandler = (meetupId) => {
-		console.log(meetupId);
+	const removeFavoriteHandler = (recipeId) => {
+		console.log(recipeId);
 		setUserFavorites((prevUserFavorites) => {
-			return prevUserFavorites.filter((meetup) => meetup.id !== meetupId);
+			return prevUserFavorites.filter((recipe) => recipe.id !== recipeId);
 		});
 	};
 
-	const itemIsFavoriteHandler = (meetupId) => {
-		return userFavorites.some((meetup) => meetup.id === meetupId);
+	const itemIsFavoriteHandler = (recipeId) => {
+		return userFavorites.some((recipe) => recipe.id === recipeId);
 	};
 
 	const context = {
